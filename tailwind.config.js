@@ -29,8 +29,10 @@ export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
-      fontFamily:  'Roboto Medium',
-      
+      fontFamily: {
+        sans: ['Roboto Slab', 'serif'],
+        serif: ['Roboto Slab', 'serif'],
+      },
       colors: {
         brand: {
           ...primaryScale,
