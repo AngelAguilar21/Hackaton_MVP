@@ -1,10 +1,6 @@
-# Talently MVP
+# DameChamba MVP
 
-MVP web para un hackathon que conecta talento joven con empleadores mediante:
-
-- Retos empresariales.
-- Evaluacion asistida por IA (Claude) o modo mock.
-- Perfil de candidato con score, badges y validacion entre pares.
+MVP web 
 
 Stack principal:
 
@@ -13,7 +9,6 @@ Stack principal:
 - React Router 6
 - Tailwind CSS
 - Lucide React
-- Anthropic SDK
 
 ## Requisitos
 
