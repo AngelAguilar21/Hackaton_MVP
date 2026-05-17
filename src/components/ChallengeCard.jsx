@@ -18,24 +18,24 @@ export default function ChallengeCard({ challenge }) {
             {company[0]}
           </div>
           <div>
-            <p className="text-xs text-slate-500 font-medium">{company}</p>
+            <p className="text-xs text-palette-text-small font-medium">{company}</p>
             <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold border ${difficultyColor}`}>
               {difficulty}
             </span>
           </div>
         </div>
-        <div className="flex items-center gap-1 text-amber-500 font-bold text-sm flex-shrink-0">
+        <div className="flex items-center gap-1 text-palette-button-primary font-bold text-sm flex-shrink-0">
           <Star size={14} fill="currentColor" />
           +{points} pts
         </div>
       </div>
 
-      <h3 className="font-bold text-slate-800 leading-snug group-hover:text-violet-700 transition-colors">
+      <h3 className="font-bold text-palette-text-primary leading-snug group-hover:text-palette-text-primary transition-colors">
         {title}
       </h3>
 
-      <div className="flex items-center gap-3 text-xs text-slate-500">
-        <span className="inline-flex items-center gap-1 px-2 py-1 bg-slate-100 rounded-lg font-medium text-slate-600">
+      <div className="flex items-center gap-3 text-xs text-palette-text-small">
+        <span className="inline-flex items-center gap-1 px-2 py-1 bg-palette-fonto-light rounded-lg font-medium text-palette-text-primary">
           {area}
         </span>
         <span className="flex items-center gap-1">

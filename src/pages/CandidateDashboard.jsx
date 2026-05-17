@@ -22,7 +22,7 @@ export default function CandidateDashboard() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 page-enter">
       {/* Header */}
-      <div className="card mb-6 bg-gradient-to-r from-violet-600 to-purple-700 text-white">
+      <div className="card mb-6 bg-gradient-to-r from-palette-text-primary to-palette-button-primary text-white">
         <div className="flex flex-col md:flex-row items-center gap-6">
           <div className="flex items-center gap-5">
             <div className={`w-16 h-16 ${currentUser.avatarColor} rounded-3xl flex items-center justify-center text-white font-black text-2xl flex-shrink-0 shadow-lg`}>
@@ -30,8 +30,8 @@ export default function CandidateDashboard() {
             </div>
             <div>
               <h1 className="text-2xl font-black">{currentUser.name}</h1>
-              <p className="text-violet-200 text-sm">{currentUser.career}</p>
-              <p className="text-violet-300 text-xs mt-1">{currentUser.year} · {currentUser.location}</p>
+              <p className="text-palette-fonto-light text-sm">{currentUser.career}</p>
+              <p className="text-white/60 text-xs mt-1">{currentUser.year} · {currentUser.location}</p>
             </div>
           </div>
           <div className="md:ml-auto flex flex-col items-center gap-2">
@@ -50,14 +50,14 @@ export default function CandidateDashboard() {
       {/* Stats row */}
       <div className="grid grid-cols-3 gap-4 mb-6">
         {[
-          { label: 'Retos completados', value: currentUser.challengesCompleted + completedChallenges.length, icon: <CheckCircle size={18} className="text-violet-500" /> },
-          { label: 'Validaciones recibidas', value: currentUser.validationsReceived, icon: <Users size={18} className="text-sky-500" /> },
-          { label: 'Sellos de habilidad', value: allBadges.length, icon: <Star size={18} className="text-amber-500" /> },
+          { label: 'Retos completados', value: currentUser.challengesCompleted + completedChallenges.length, icon: <CheckCircle size={18} className="text-palette-button-primary" /> },
+          { label: 'Validaciones recibidas', value: currentUser.validationsReceived, icon: <Users size={18} className="text-palette-wt-accent" /> },
+          { label: 'Sellos de habilidad', value: allBadges.length, icon: <Star size={18} className="text-palette-button-primary" /> },
         ].map((s, i) => (
           <div key={i} className="card text-center">
             <div className="flex justify-center mb-1">{s.icon}</div>
-            <div className="text-2xl font-black text-slate-800">{s.value}</div>
-            <div className="text-xs text-slate-500 mt-1">{s.label}</div>
+            <div className="text-2xl font-black text-palette-text-primary">{s.value}</div>
+            <div className="text-xs text-palette-text-small mt-1">{s.label}</div>
           </div>
         ))}
       </div>
@@ -67,18 +67,18 @@ export default function CandidateDashboard() {
         <div className="space-y-6 lg:col-span-1">
           {/* Score breakdown */}
           <div className="card">
-            <h2 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
-              <TrendingUp size={18} className="text-violet-500" />
+            <h2 className="font-bold text-palette-text-primary mb-4 flex items-center gap-2">
+              <TrendingUp size={18} className="text-palette-button-primary" />
               Composición del score
             </h2>
             <div className="space-y-3">
               {[
-                { label: 'Evaluación de IA', pct: currentUser.scoreBreakdown.ai, color: 'bg-violet-500' },
-                { label: 'Validación entre pares', pct: currentUser.scoreBreakdown.peers, color: 'bg-sky-500' },
-                { label: 'Portafolio', pct: currentUser.scoreBreakdown.portfolio, color: 'bg-emerald-500' },
+                { label: 'Evaluación de IA', pct: currentUser.scoreBreakdown.ai, color: 'bg-palette-text-primary' },
+                { label: 'Validación entre pares', pct: currentUser.scoreBreakdown.peers, color: 'bg-palette-button-primary' },
+                { label: 'Portafolio', pct: currentUser.scoreBreakdown.portfolio, color: 'bg-palette-wt-accent' },
               ].map((item, i) => (
                 <div key={i}>
-                  <div className="flex justify-between text-xs text-slate-600 mb-1">
+                  <div className="flex justify-between text-xs text-palette-text-small mb-1">
                     <span>{item.label}</span>
                     <span className="font-semibold">{item.pct}%</span>
                   </div>
@@ -92,7 +92,7 @@ export default function CandidateDashboard() {
 
           {/* Badges */}
           <div className="card">
-            <h2 className="font-bold text-slate-800 mb-4">Mis sellos de habilidad</h2>
+            <h2 className="font-bold text-palette-text-primary mb-4">Mis sellos de habilidad</h2>
             <div className="space-y-3">
               {allBadges.slice(0, 4).map((b, i) => (
                 <SkillBadge key={b.id || i} skill={b.skill} level={b.level} icon={b.icon} source={b.source} />
@@ -103,7 +103,7 @@ export default function CandidateDashboard() {
                 </p>
               )}
             </div>
-            <Link to="/challenges" className="mt-4 text-sm text-violet-600 hover:text-violet-800 font-semibold flex items-center gap-1">
+            <Link to="/challenges" className="mt-4 text-sm text-palette-button-primary hover:text-palette-text-primary font-semibold flex items-center gap-1">
               Ganar más sellos <ArrowRight size={14} />
             </Link>
           </div>
@@ -114,16 +114,16 @@ export default function CandidateDashboard() {
           {/* Completed challenges */}
           {completedChallenges.length > 0 && (
             <div className="card">
-              <h2 className="font-bold text-slate-800 mb-4">Retos completados recientemente</h2>
+              <h2 className="font-bold text-palette-text-primary mb-4">Retos completados recientemente</h2>
               <div className="space-y-3">
                 {completedChallenges.map((c, i) => (
-                  <div key={i} className="flex items-center gap-4 p-3 bg-emerald-50 rounded-xl border border-emerald-200">
-                    <CheckCircle size={20} className="text-emerald-500 flex-shrink-0" />
+                  <div key={i} className="flex items-center gap-4 p-3 bg-palette-fonto-light rounded-xl border border-palette-button-primary">
+                    <CheckCircle size={20} className="text-palette-wt-accent flex-shrink-0" />
                     <div className="flex-1 min-w-0">
-                      <p className="font-semibold text-slate-800 text-sm truncate">{c.title}</p>
-                      <p className="text-xs text-slate-500">{c.company} · Puntaje: {c.result?.score ?? '—'}/100</p>
+                      <p className="font-semibold text-palette-text-primary text-sm truncate">{c.title}</p>
+                      <p className="text-xs text-palette-text-small">{c.company} · Puntaje: {c.result?.score ?? '—'}/100</p>
                     </div>
-                    <span className="text-amber-600 font-bold text-sm flex-shrink-0">+{c.points} pts</span>
+                    <span className="text-palette-button-primary font-bold text-sm flex-shrink-0">+{c.points} pts</span>
                   </div>
                 ))}
               </div>
@@ -133,8 +133,8 @@ export default function CandidateDashboard() {
           {/* Recommended challenges */}
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h2 className="font-bold text-slate-800">Retos recomendados para ti</h2>
-              <Link to="/challenges" className="text-sm text-violet-600 hover:text-violet-800 font-semibold flex items-center gap-1">
+              <h2 className="font-bold text-palette-text-primary">Retos recomendados para ti</h2>
+              <Link to="/challenges" className="text-sm text-palette-button-primary hover:text-palette-text-primary font-semibold flex items-center gap-1">
                 Ver todos <ArrowRight size={14} />
               </Link>
             </div>
@@ -147,18 +147,18 @@ export default function CandidateDashboard() {
 
           {/* Bio / about */}
           <div className="card">
-            <h2 className="font-bold text-slate-800 mb-3">Sobre mí</h2>
-            <p className="text-sm text-slate-600 leading-relaxed">{currentUser.bio}</p>
+            <h2 className="font-bold text-palette-text-primary mb-3">Sobre mí</h2>
+            <p className="text-sm text-palette-text-small leading-relaxed">{currentUser.bio}</p>
             <div className="mt-4">
-              <h3 className="text-sm font-semibold text-slate-700 mb-3">Proyectos en portafolio</h3>
+              <h3 className="text-sm font-semibold text-palette-text-primary mb-3">Proyectos en portafolio</h3>
               <div className="space-y-3">
                 {currentUser.projects.map(p => (
                   <div key={p.id} className="p-3 bg-slate-50 rounded-xl border border-slate-200">
-                    <p className="font-semibold text-sm text-slate-800">{p.title}</p>
-                    <p className="text-xs text-slate-500 mt-1 line-clamp-2">{p.description}</p>
+                    <p className="font-semibold text-sm text-palette-text-primary">{p.title}</p>
+                    <p className="text-xs text-palette-text-small mt-1 line-clamp-2">{p.description}</p>
                     <div className="flex flex-wrap gap-1.5 mt-2">
                       {p.tags.map(t => (
-                        <span key={t} className="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded-full">{t}</span>
+                        <span key={t} className="text-xs bg-palette-fonto-light text-palette-text-primary px-2 py-0.5 rounded-full">{t}</span>
                       ))}
                     </div>
                   </div>
