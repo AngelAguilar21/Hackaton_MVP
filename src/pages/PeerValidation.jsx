@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { VALIDATION_QUEUE } from '../data/mockData'
 import { useApp } from '../context/AppContext'
-import { CheckCircle, Star, Users, MessageSquare, ChevronRight, Award } from 'lucide-react'
+import { CheckCircle, Star, Users, MessageSquare, ChevronRight, Award, BadgeCheck } from 'lucide-react'
 
 const CRITERIA_OPTIONS = [
   'Claridad en la presentación',
@@ -48,16 +48,16 @@ export default function PeerValidation() {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 page-enter">
       <div className="mb-8">
-        <h1 className="text-3xl font-black text-slate-800 mb-2">Validación entre pares</h1>
-        <p className="text-slate-500">Revisa proyectos de otros candidatos y avala sus habilidades. Tu validación suma a la reputación de la comunidad.</p>
+        <h1 className="text-3xl font-black text-palette-text-primary mb-2">Validación entre pares</h1>
+        <p className="text-palette-text-small">Revisa proyectos de otros candidatos y avala sus habilidades. Tu validación suma a la reputación de la comunidad.</p>
       </div>
 
       {done && (
-        <div className="card bg-emerald-50 border-2 border-emerald-200 mb-6 flex items-center gap-4">
-          <CheckCircle size={24} className="text-emerald-500 flex-shrink-0" />
+        <div className="card bg-palette-fonto-light border-2 border-palette-wt-accent mb-6 flex items-center gap-4">
+          <CheckCircle size={24} className="text-palette-wt-accent flex-shrink-0" />
           <div>
-            <p className="font-bold text-emerald-800">¡Validación enviada exitosamente!</p>
-            <p className="text-sm text-emerald-600">Tu aval a {done} ya es parte de su perfil de reputación.</p>
+            <p className="font-bold text-palette-text-primary">¡Validación enviada exitosamente!</p>
+            <p className="text-sm text-palette-wt-accent">Tu aval a {done} ya es parte de su perfil de reputación.</p>
           </div>
         </div>
       )}
@@ -65,21 +65,21 @@ export default function PeerValidation() {
       {/* My given validations */}
       {peerValidations.length > 0 && (
         <div className="card mb-6">
-          <h2 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
-            <Award size={18} className="text-violet-500" />
+          <h2 className="font-bold text-palette-text-primary mb-4 flex items-center gap-2">
+            <Award size={18} className="text-palette-button-primary" />
             Validaciones que has dado ({peerValidations.length})
           </h2>
           <div className="space-y-2">
             {peerValidations.map((v, i) => (
-              <div key={i} className="flex items-center gap-3 p-3 bg-violet-50 rounded-xl border border-violet-100">
-                <CheckCircle size={16} className="text-violet-500 flex-shrink-0" />
+              <div key={i} className="flex items-center gap-3 p-3 bg-palette-fonto-light rounded-xl border border-palette-button-primary">
+                <CheckCircle size={16} className="text-palette-wt-accent flex-shrink-0" />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-slate-800 truncate">{v.projectTitle}</p>
-                  <p className="text-xs text-slate-500">Avalado a {v.targetCandidate}</p>
+                  <p className="text-sm font-semibold text-palette-text-primary truncate">{v.projectTitle}</p>
+                  <p className="text-xs text-palette-text-small">Avalado a {v.targetCandidate}</p>
                 </div>
                 <div className="flex gap-1 flex-wrap justify-end">
                   {v.criteria.slice(0, 2).map(c => (
-                    <span key={c} className="text-xs bg-violet-100 text-violet-700 px-2 py-0.5 rounded-full">{c}</span>
+                    <span key={c} className="text-xs bg-palette-button-primary text-white px-2 py-0.5 rounded-full">{c}</span>
                   ))}
                 </div>
               </div>
@@ -91,8 +91,8 @@ export default function PeerValidation() {
       <div className="grid lg:grid-cols-5 gap-6">
         {/* Queue */}
         <div className="lg:col-span-2 space-y-4">
-          <h2 className="font-bold text-slate-700 flex items-center gap-2">
-            <Users size={18} className="text-sky-500" />
+          <h2 className="font-bold text-palette-text-primary flex items-center gap-2">
+            <Users size={18} className="text-palette-button-primary" />
             Proyectos esperando validación ({queue.length})
           </h2>
 
@@ -100,26 +100,26 @@ export default function PeerValidation() {
             <button
               key={item.id}
               onClick={() => { setSelected(item); setCriteriaChecked([]); setComment('') }}
-              className={`w-full text-left card hover:shadow-md transition-all duration-200 border-2 ${selected?.id === item.id ? 'border-violet-400 bg-violet-50' : 'border-transparent'}`}
+              className={`w-full text-left card hover:shadow-md transition-all duration-200 border-2 ${selected?.id === item.id ? 'border-palette-button-primary bg-palette-fonto-light' : 'border-transparent'}`}
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className={`w-10 h-10 ${item.candidate.avatarColor} rounded-xl flex items-center justify-center text-white font-bold text-sm flex-shrink-0`}>
                   {item.candidate.initials}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-bold text-slate-800 text-sm truncate">{item.candidate.name}</p>
-                  <p className="text-xs text-slate-500 truncate">{item.candidate.career}</p>
+                  <p className="font-bold text-palette-text-primary text-sm truncate">{item.candidate.name}</p>
+                  <p className="text-xs text-palette-text-small truncate">{item.candidate.career}</p>
                 </div>
-                <div className="flex items-center gap-1 text-xs text-slate-400">
+                <div className="flex items-center gap-1 text-xs text-palette-text-small">
                   <Star size={11} />
                   {item.candidate.score}
                 </div>
-                <ChevronRight size={16} className={`text-slate-300 transition-colors ${selected?.id === item.id ? 'text-violet-500' : ''}`} />
+                <ChevronRight size={16} className={`text-slate-300 transition-colors ${selected?.id === item.id ? 'text-palette-button-primary' : ''}`} />
               </div>
-              <h3 className="font-semibold text-slate-700 text-sm line-clamp-2">{item.project.title}</h3>
+              <h3 className="font-semibold text-palette-text-primary text-sm line-clamp-2">{item.project.title}</h3>
               <div className="flex flex-wrap gap-1.5 mt-2">
                 {item.skills.slice(0, 2).map(s => (
-                  <span key={s} className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">{s}</span>
+                    <span key={s} className="text-xs bg-palette-fonto-light text-palette-text-primary px-2 py-0.5 rounded-full">{s}</span>
                 ))}
               </div>
             </button>
@@ -127,7 +127,7 @@ export default function PeerValidation() {
 
           {queue.length === 0 && (
             <div className="card text-center py-10 text-slate-400">
-              <p className="text-4xl mb-3">✅</p>
+              <BadgeCheck size={40} className="mx-auto mb-3 text-palette-button-primary" />
               <p className="font-semibold">¡Has validado todos los proyectos!</p>
               <p className="text-sm mt-1">Vuelve más tarde para nuevas solicitudes.</p>
             </div>
@@ -145,24 +145,24 @@ export default function PeerValidation() {
                     {selected.candidate.initials}
                   </div>
                   <div>
-                    <p className="font-bold text-slate-800">{selected.candidate.name}</p>
-                    <p className="text-xs text-slate-500">{selected.candidate.career}</p>
+                    <p className="font-bold text-palette-text-primary">{selected.candidate.name}</p>
+                    <p className="text-xs text-palette-text-small">{selected.candidate.career}</p>
                   </div>
                 </div>
-                <h2 className="text-lg font-black text-slate-800 mb-3">{selected.project.title}</h2>
-                <p className="text-sm text-slate-600 leading-relaxed">{selected.project.description}</p>
+                <h2 className="text-lg font-black text-palette-text-primary mb-3">{selected.project.title}</h2>
+                <p className="text-sm text-palette-text-small leading-relaxed">{selected.project.description}</p>
                 <div className="flex flex-wrap gap-1.5 mt-3">
                   {selected.project.tags.map(t => (
-                    <span key={t} className="text-xs bg-slate-100 border border-slate-200 text-slate-600 px-2.5 py-1 rounded-full font-medium">{t}</span>
+                    <span key={t} className="text-xs bg-palette-fonto-light border border-palette-button-primary text-palette-text-primary px-2.5 py-1 rounded-full font-medium">{t}</span>
                   ))}
                 </div>
               </div>
 
-              <hr className="border-slate-100" />
+              <hr className="border-palette-fonto-light" />
 
               {/* Criteria */}
               <div>
-                <h3 className="font-bold text-slate-700 mb-3 text-sm">¿Qué habilidades demostró? (selecciona al menos 1)</h3>
+                <h3 className="font-bold text-palette-text-primary mb-3 text-sm">¿Qué habilidades demostró? (selecciona al menos 1)</h3>
                 <div className="grid grid-cols-2 gap-2">
                   {CRITERIA_OPTIONS.map(c => (
                     <button
@@ -170,8 +170,8 @@ export default function PeerValidation() {
                       onClick={() => toggleCriteria(c)}
                       className={`text-left px-3 py-2 rounded-xl border text-xs font-medium transition-all ${
                         criteriaChecked.includes(c)
-                          ? 'bg-violet-50 border-violet-400 text-violet-700'
-                          : 'bg-slate-50 border-slate-200 text-slate-600 hover:border-slate-300'
+                          ? 'bg-palette-fonto-light border-palette-button-primary text-palette-text-primary'
+                          : 'bg-palette-fonto-light border-palette-fonto-light text-palette-text-primary hover:border-palette-button-primary'
                       }`}
                     >
                       {criteriaChecked.includes(c) && <span className="mr-1">✓</span>}
@@ -183,7 +183,7 @@ export default function PeerValidation() {
 
               {/* Comment */}
               <div>
-                <h3 className="font-bold text-slate-700 mb-2 text-sm flex items-center gap-2">
+                <h3 className="font-bold text-palette-text-primary mb-2 text-sm flex items-center gap-2">
                   <MessageSquare size={14} />
                   Feedback específico para el candidato
                 </h3>
@@ -192,9 +192,9 @@ export default function PeerValidation() {
                   onChange={e => setComment(e.target.value)}
                   placeholder="Escribe un feedback específico y constructivo. ¿Qué te pareció destacable? ¿Qué podría mejorar?"
                   rows={4}
-                  className="w-full p-3 rounded-xl border border-slate-200 focus:border-violet-400 focus:ring-2 focus:ring-violet-100 outline-none text-sm resize-none transition-all"
+                  className="w-full p-3 rounded-xl border border-palette-fonto-light focus:border-palette-button-primary focus:ring-2 focus:ring-palette-fonto-light outline-none text-sm resize-none transition-all"
                 />
-                <p className={`text-xs mt-1 ${comment.trim().length < 20 ? 'text-slate-400' : 'text-emerald-600'}`}>
+                <p className={`text-xs mt-1 ${comment.trim().length < 20 ? 'text-slate-400' : 'text-palette-button-primary'}`}>
                   {comment.trim().length}/20 caracteres mínimo
                 </p>
               </div>

@@ -1,6 +1,7 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { LogOut, Briefcase, User, BookOpen, CheckSquare } from 'lucide-react'
 import { useApp } from '../context/AppContext'
+import logo from '../../assets/Logo.svg'
 
 export default function Navbar() {
   const { currentUser, role, logout } = useApp()
@@ -18,10 +19,11 @@ export default function Navbar() {
     <nav className="bg-white border-b border-slate-100 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link to={currentUser ? (role === 'employer' ? '/employer' : '/dashboard') : '/'} className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-gradient-to-br from-violet-600 to-purple-700 rounded-xl flex items-center justify-center">
-            <span className="text-white font-black text-sm">T</span>
-          </div>
-          <span className="font-black text-xl text-slate-800">Talently</span>
+          <img src={logo} alt="DameChamba" className="w-9 h-9 object-contain" />
+          <span className="flex flex-col leading-none font-black text-xl text-palette-text-primary">
+            <span>Dame</span>
+            <span className="ml-4 -mt-0.5">Chamba</span>
+          </span>
         </Link>
 
         {currentUser && (
@@ -40,12 +42,12 @@ export default function Navbar() {
             )}
 
             <div className="flex items-center gap-2 ml-3 pl-3 border-l border-slate-200">
-              <div className={`w-8 h-8 rounded-lg ${currentUser.avatarColor || 'bg-violet-500'} flex items-center justify-center text-white font-bold text-xs`}>
+              <div className={`w-8 h-8 rounded-lg ${currentUser.avatarColor || 'bg-palette-button-primary'} flex items-center justify-center text-white font-bold text-xs`}>
                 {currentUser.initials || currentUser.name?.[0] || 'U'}
               </div>
               <button
                 onClick={handleLogout}
-                className="p-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
+                className="p-2 rounded-lg text-palette-text-small hover:text-palette-text-primary hover:bg-palette-fonto-light transition-colors"
                 title="Cerrar sesión"
               >
                 <LogOut size={16} />
@@ -69,7 +71,7 @@ function NavLink({ to, icon, label, active }) {
     <Link
       to={to}
       className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-        active ? 'bg-violet-50 text-violet-700' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-800'
+        active ? 'bg-palette-fonto-light text-palette-text-primary' : 'text-palette-text-small hover:bg-palette-fonto-light hover:text-palette-text-primary'
       }`}
     >
       {icon}

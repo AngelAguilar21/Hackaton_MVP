@@ -1,20 +1,57 @@
 /** @type {import('tailwindcss').Config} */
+const primaryScale = {
+  50: '#d9ebfd',
+  100: '#d9ebfd',
+  200: '#a8c2df',
+  300: '#a8c2df',
+  400: '#002a8d',
+  500: '#002a8d',
+  600: '#002a8d',
+  700: '#002a8d',
+  800: '#002a8d',
+  900: '#002a8d',
+}
+
+const buttonScale = {
+  50: '#d9ebfd',
+  100: '#d9ebfd',
+  200: '#a8c2df',
+  300: '#a8c2df',
+  400: '#fe951f',
+  500: '#fe951f',
+  600: '#fe951f',
+  700: '#002a8d',
+  800: '#002a8d',
+  900: '#002a8d',
+}
+
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Roboto Slab', 'serif'],
+        serif: ['Roboto Slab', 'serif'],
+      },
       colors: {
         brand: {
-          50:  '#f5f3ff',
-          100: '#ede9fe',
-          200: '#ddd6fe',
-          300: '#c4b5fd',
-          400: '#a78bfa',
-          500: '#8b5cf6',
-          600: '#7c3aed',
-          700: '#6d28d9',
-          800: '#5b21b6',
-          900: '#4c1d95',
+          ...primaryScale,
+        },
+        blue: primaryScale,
+        sky: primaryScale,
+        teal: primaryScale,
+        emerald: primaryScale,
+        rose: primaryScale,
+        pink: primaryScale,
+        orange: buttonScale,
+        amber: buttonScale,
+        red: buttonScale,
+        palette: {
+          'text-primary': '#002a8d',
+          'text-small': '#668ebb',
+          'button-primary': '#ff7800',
+          'wt-accent': '#7ea500',
+          'fonto-light': '#d9ebfd',
         }
       },
       animation: {

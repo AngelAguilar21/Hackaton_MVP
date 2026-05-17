@@ -21,8 +21,8 @@ export default function ChallengesFeed() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 page-enter">
       <div className="mb-8">
-        <h1 className="text-3xl font-black text-slate-800 mb-2">Retos de Empresas</h1>
-        <p className="text-slate-500">Resuelve retos reales y suma puntos verificados a tu perfil de reputación.</p>
+        <h1 className="text-3xl font-black text-palette-text-primary mb-2">Retos de Empresas</h1>
+        <p className="text-palette-text-small">Resuelve retos reales y suma puntos verificados a tu perfil de reputación.</p>
       </div>
 
       {/* Filters */}
@@ -35,7 +35,7 @@ export default function ChallengesFeed() {
               placeholder="Buscar retos o empresas..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 focus:border-violet-400 focus:ring-2 focus:ring-violet-100 outline-none text-sm transition-all"
+              className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 focus:border-palette-button-primary focus:ring-2 focus:ring-palette-fonto-light outline-none text-sm transition-all"
             />
           </div>
           <div className="flex items-center gap-2 flex-wrap">
@@ -45,7 +45,7 @@ export default function ChallengesFeed() {
                 <button
                   key={a}
                   onClick={() => setArea(a)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${area === a ? 'bg-violet-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${area === a ? 'bg-palette-button-primary text-white' : 'bg-palette-fonto-light text-palette-text-primary hover:opacity-90'}`}
                 >
                   {a}
                 </button>
@@ -56,7 +56,7 @@ export default function ChallengesFeed() {
                 <button
                   key={d}
                   onClick={() => setDifficulty(d)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${difficulty === d ? 'bg-slate-700 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${difficulty === d ? 'bg-palette-text-primary text-white' : 'bg-palette-fonto-light text-palette-text-primary hover:opacity-90'}`}
                 >
                   {d}
                 </button>
@@ -74,7 +74,7 @@ export default function ChallengesFeed() {
         </div>
       ) : (
         <div className="text-center py-20 text-slate-400">
-          <p className="text-5xl mb-4">🔍</p>
+          <p className="text-5xl mb-4 text-palette-button-primary">?</p>
           <p className="font-semibold">No hay retos con esos filtros</p>
           <p className="text-sm mt-1">Prueba con otros criterios de búsqueda</p>
         </div>

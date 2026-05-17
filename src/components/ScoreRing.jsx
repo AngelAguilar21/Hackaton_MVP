@@ -4,9 +4,8 @@ const RADIUS = 76
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS
 
 function scoreColor(score) {
-  if (score >= 800) return '#7c3aed'
-  if (score >= 600) return '#0ea5e9'
-  return '#10b981'
+  if (score >= 800) return '#002a8d'
+  return '#fe951f'
 }
 
 function scoreLabel(score) {
@@ -38,7 +37,7 @@ export default function ScoreRing({ score, size = 'md' }) {
         <svg width={dim} height={dim} className="drop-shadow-sm">
           <circle
             cx={dim / 2} cy={dim / 2} r={r}
-            fill="none" stroke="#e2e8f0" strokeWidth={strokeWidth}
+            fill="none" stroke="#d9ebfd" strokeWidth={strokeWidth}
           />
           <circle
             cx={dim / 2} cy={dim / 2} r={r}
@@ -57,7 +56,7 @@ export default function ScoreRing({ score, size = 'md' }) {
             {score}
           </span>
           {size !== 'sm' && (
-            <span className="text-xs text-slate-400 font-medium mt-1">/ 1000</span>
+            <span className="text-xs text-palette-text-small font-medium mt-1">/ 1000</span>
           )}
         </div>
       </div>

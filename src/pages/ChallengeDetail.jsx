@@ -14,7 +14,7 @@ async function evaluateWithClaude(challenge, solution) {
     const Anthropic = (await import('@anthropic-ai/sdk')).default
     const client = new Anthropic({ apiKey: ANTHROPIC_KEY, dangerouslyAllowBrowser: true })
 
-    const prompt = `Eres un evaluador experto de habilidades profesionales para Talently, una plataforma de reputación profesional para jóvenes talentos latinoamericanos.
+    const prompt = `Eres un evaluador experto de habilidades profesionales para DameChamba, una plataforma de reputación profesional para jóvenes talentos latinoamericanos.
 
 RETO: ${challenge.title}
 EMPRESA: ${challenge.company}
@@ -91,8 +91,8 @@ export default function ChallengeDetail() {
 
   if (!challenge) return (
     <div className="max-w-3xl mx-auto px-6 py-20 text-center">
-      <p className="text-5xl mb-4">😕</p>
-      <h2 className="font-bold text-slate-800 text-xl mb-4">Reto no encontrado</h2>
+      <p className="text-5xl mb-4 text-palette-button-primary">?</p>
+      <h2 className="font-bold text-palette-text-primary text-xl mb-4">Reto no encontrado</h2>
       <Link to="/challenges" className="btn-primary inline-block">Ver todos los retos</Link>
     </div>
   )
@@ -114,19 +114,19 @@ export default function ChallengeDetail() {
       id: `badge-${Date.now()}`,
       skill: result.habilidadDemostrada,
       level: result.nivel,
-      icon: result.icono || '🏅',
+      icon: result.icono || null,
       source: `Reto empresarial — ${challenge.company}`,
     }
     addCompletedChallenge(challenge, { ...result, badge })
     setBadgeSaved(true)
   }
 
-  const scoreColor = result?.score >= 80 ? 'text-violet-600' : result?.score >= 60 ? 'text-sky-600' : 'text-amber-600'
-  const scoreBg = result?.score >= 80 ? 'from-violet-50 to-purple-50 border-violet-200' : result?.score >= 60 ? 'from-sky-50 to-blue-50 border-sky-200' : 'from-amber-50 to-yellow-50 border-amber-200'
+  const scoreColor = result?.score >= 80 ? 'text-palette-wt-accent' : result?.score >= 60 ? 'text-palette-button-primary' : 'text-palette-button-primary'
+  const scoreBg = result?.score >= 80 ? 'from-palette-fonto-light to-palette-fonto-light border-palette-wt-accent' : result?.score >= 60 ? 'from-palette-fonto-light to-palette-fonto-light border-palette-button-primary' : 'from-palette-fonto-light to-palette-fonto-light border-palette-button-primary'
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 page-enter">
-      <Link to="/challenges" className="flex items-center gap-2 text-slate-500 hover:text-violet-700 text-sm font-medium mb-6 transition-colors w-fit">
+      <Link to="/challenges" className="flex items-center gap-2 text-palette-text-small hover:text-palette-button-primary text-sm font-medium mb-6 transition-colors w-fit">
         <ArrowLeft size={16} /> Volver a retos
       </Link>
 
@@ -137,10 +137,10 @@ export default function ChallengeDetail() {
             {challenge.company[0]}
           </div>
           <div>
-            <p className="text-sm font-semibold text-slate-500">{challenge.company} · {challenge.area}</p>
-            <h1 className="text-xl font-black text-slate-800 leading-snug">{challenge.title}</h1>
+            <p className="text-sm font-semibold text-white/80">{challenge.company} · {challenge.area}</p>
+            <h1 className="text-xl font-black text-white leading-snug">{challenge.title}</h1>
           </div>
-          <div className="ml-auto flex items-center gap-1 text-amber-500 font-bold text-sm flex-shrink-0">
+          <div className="ml-auto flex items-center gap-1 text-palette-button-primary font-bold text-sm flex-shrink-0">
             <Star size={14} fill="currentColor" />
             +{challenge.points} pts
           </div>
@@ -148,16 +148,16 @@ export default function ChallengeDetail() {
 
         <div className="prose prose-sm max-w-none">
           {challenge.description.split('\n').filter(Boolean).map((para, i) => (
-            <p key={i} className="text-slate-600 leading-relaxed mb-3">{para}</p>
+            <p key={i} className="text-palette-text-small leading-relaxed mb-3">{para}</p>
           ))}
         </div>
 
         <div className="mt-4 pt-4 border-t border-slate-100">
-          <h3 className="text-sm font-bold text-slate-700 mb-3">Criterios de evaluación:</h3>
+          <h3 className="text-sm font-bold text-palette-text-primary mb-3">Criterios de evaluación:</h3>
           <ul className="space-y-1.5">
             {challenge.criteria.map((c, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
-                <CheckCircle size={14} className="text-violet-500 mt-0.5 flex-shrink-0" />
+              <li key={i} className="flex items-start gap-2 text-sm text-palette-text-small">
+                <CheckCircle size={14} className="text-palette-wt-accent mt-0.5 flex-shrink-0" />
                 {c}
               </li>
             ))}
@@ -168,13 +168,13 @@ export default function ChallengeDetail() {
       {/* Submission area */}
       {status !== 'done' && (
         <div className="card mb-6">
-          <h2 className="font-bold text-slate-800 mb-1">Tu solución</h2>
-          <p className="text-sm text-slate-500 mb-4">
+          <h2 className="font-bold text-palette-text-primary mb-1">Tu solución</h2>
+          <p className="text-sm text-palette-text-small mb-4">
             Escribe tu propuesta de solución al reto. La IA la evaluará según los criterios de {challenge.company}.
           </p>
 
           {!ANTHROPIC_KEY && (
-            <div className="flex items-start gap-3 p-3 bg-amber-50 border border-amber-200 rounded-xl mb-4 text-xs text-amber-700">
+            <div className="flex items-start gap-3 p-3 bg-palette-fonto-light border border-palette-button-primary rounded-xl mb-4 text-xs text-palette-text-primary">
               <AlertCircle size={14} className="flex-shrink-0 mt-0.5" />
               <span>
                 <strong>Modo demo:</strong> No se detectó VITE_ANTHROPIC_API_KEY. La evaluación usará una respuesta simulada. Para activar la IA real, crea un archivo <code>.env</code> con tu API key de Anthropic.
@@ -187,16 +187,16 @@ export default function ChallengeDetail() {
             onChange={e => setSolution(e.target.value)}
             placeholder="Describe tu propuesta de solución aquí. Incluye tu análisis del problema, las acciones concretas que recomendarías y cómo medirías el éxito..."
             rows={10}
-            className="w-full p-4 rounded-xl border border-slate-200 focus:border-violet-400 focus:ring-2 focus:ring-violet-100 outline-none text-sm leading-relaxed resize-none transition-all"
+            className="w-full p-4 rounded-xl border border-slate-200 focus:border-palette-button-primary focus:ring-2 focus:ring-palette-fonto-light outline-none text-sm leading-relaxed resize-none transition-all"
           />
           <div className="flex items-center justify-between mt-3">
-            <span className={`text-xs ${solution.length < 50 ? 'text-slate-400' : 'text-emerald-600'}`}>
+            <span className={`text-xs ${solution.length < 50 ? 'text-palette-text-small' : 'text-palette-wt-accent'}`}>
               {solution.trim().split(/\s+/).filter(Boolean).length} palabras {solution.length < 50 && '(mínimo ~50 palabras)'}
             </span>
             <button
               onClick={handleSubmit}
               disabled={solution.trim().length < 50 || status === 'evaluating'}
-              className="flex items-center gap-2 bg-violet-600 hover:bg-violet-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-semibold px-6 py-3 rounded-xl transition-all text-sm shadow-md hover:shadow-lg"
+              className="flex items-center gap-2 bg-palette-button-primary hover:opacity-90 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-semibold px-6 py-3 rounded-xl transition-all text-sm shadow-md hover:shadow-lg"
             >
               {status === 'evaluating' ? (
                 <>
@@ -217,16 +217,16 @@ export default function ChallengeDetail() {
       {/* Loading state */}
       {status === 'evaluating' && (
         <div className="card text-center py-12">
-          <div className="w-16 h-16 bg-violet-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse-slow">
-            <Sparkles size={28} className="text-violet-600" />
+          <div className="w-16 h-16 bg-palette-fonto-light rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse-slow">
+            <Sparkles size={28} className="text-palette-button-primary" />
           </div>
-          <h3 className="font-bold text-slate-800 mb-2">Analizando tu solución...</h3>
-          <p className="text-sm text-slate-500">La IA está evaluando tu respuesta según los criterios de {challenge.company}.</p>
+          <h3 className="font-bold text-palette-text-primary mb-2">Analizando tu solución...</h3>
+          <p className="text-sm text-palette-text-small">La IA está evaluando tu respuesta según los criterios de {challenge.company}.</p>
           <div className="mt-6 flex justify-center gap-1">
             {[0,1,2].map(i => (
               <div
                 key={i}
-                className="w-2 h-2 rounded-full bg-violet-400 animate-bounce"
+                className="w-2 h-2 rounded-full bg-palette-button-primary animate-bounce"
                 style={{ animationDelay: `${i * 0.15}s` }}
               />
             ))}
@@ -241,43 +241,43 @@ export default function ChallengeDetail() {
           <div className={`card bg-gradient-to-br ${scoreBg} border-2`}>
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div>
-                <p className="text-sm font-semibold text-slate-500 mb-1">Resultado de tu evaluación</p>
-                <h2 className="font-black text-slate-800 text-xl">{challenge.title}</h2>
-                <p className="text-sm text-slate-500 mt-1">{challenge.company}</p>
+                <p className="text-sm font-semibold text-palette-text-small mb-1">Resultado de tu evaluación</p>
+                <h2 className="font-black text-palette-text-primary text-xl">{challenge.title}</h2>
+                <p className="text-sm text-palette-text-small mt-1">{challenge.company}</p>
               </div>
               <div className="text-center">
                 <div className={`text-6xl font-black ${scoreColor}`}>{result.score}</div>
-                <div className="text-xs text-slate-500 font-medium">/ 100 puntos</div>
+                <div className="text-xs text-palette-text-small font-medium">/ 100 puntos</div>
               </div>
             </div>
 
             <div className="mt-4 pt-4 border-t border-slate-200">
-              <p className="text-sm text-slate-700 leading-relaxed italic">"{result.resumenEjecutivo}"</p>
+              <p className="text-sm text-palette-text-primary leading-relaxed italic">\"{result.resumenEjecutivo}\"</p>
             </div>
           </div>
 
           {/* New badge */}
-          <div className="card border-2 border-amber-200 bg-gradient-to-br from-amber-50 to-yellow-50">
+          <div className="card border-2 border-palette-button-primary bg-palette-fonto-light">
             <div className="flex items-center gap-2 mb-4">
-              <Star size={18} className="text-amber-500" fill="currentColor" />
-              <h3 className="font-bold text-amber-800">¡Sello de habilidad generado!</h3>
+              <Star size={18} className="text-palette-button-primary" fill="currentColor" />
+              <h3 className="font-bold text-palette-text-primary">¡Sello de habilidad generado!</h3>
             </div>
             <SkillBadge
               skill={result.habilidadDemostrada}
               level={result.nivel}
-              icon={result.icono || '🏅'}
+              icon={result.icono || null}
               source={`Reto empresarial — ${challenge.company}`}
             />
             {!badgeSaved ? (
               <button
                 onClick={handleSaveBadge}
-                className="mt-4 btn-primary w-full flex items-center justify-center gap-2"
+                className="mt-4 bg-palette-button-primary hover:opacity-90 text-white font-semibold py-3 px-6 rounded-xl w-full flex items-center justify-center gap-2 transition-all shadow-md"
               >
                 <CheckCircle size={16} />
                 Agregar sello a mi perfil
               </button>
             ) : (
-              <div className="mt-4 flex items-center gap-2 text-emerald-600 font-semibold text-sm justify-center p-3 bg-emerald-50 rounded-xl border border-emerald-200">
+              <div className="mt-4 flex items-center gap-2 text-palette-wt-accent font-semibold text-sm justify-center p-3 bg-palette-fonto-light rounded-xl border border-palette-button-primary">
                 <CheckCircle size={16} />
                 ¡Sello agregado a tu perfil! +{challenge.points} puntos
               </div>
@@ -286,8 +286,8 @@ export default function ChallengeDetail() {
 
           {/* Detailed feedback */}
           <div className="card">
-            <h3 className="font-bold text-slate-800 mb-4">Feedback detallado de la IA</h3>
-            <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
+            <h3 className="font-bold text-palette-text-primary mb-4">Feedback detallado de la IA</h3>
+            <div className="space-y-3 text-sm text-palette-text-small leading-relaxed">
               {result.feedbackDetallado.split('\n').filter(Boolean).map((para, i) => (
                 <p key={i}>{para}</p>
               ))}
@@ -296,29 +296,29 @@ export default function ChallengeDetail() {
 
           {/* Strengths & improvements */}
           <div className="grid sm:grid-cols-2 gap-4">
-            <div className="card border-l-4 border-emerald-500">
-              <h4 className="font-bold text-slate-800 mb-3 flex items-center gap-2">
-                <CheckCircle size={16} className="text-emerald-500" />
+            <div className="card border-l-4 border-palette-wt-accent">
+              <h4 className="font-bold text-palette-text-primary mb-3 flex items-center gap-2">
+                <CheckCircle size={16} className="text-palette-wt-accent" />
                 Puntos fuertes
               </h4>
               <ul className="space-y-2">
                 {result.puntosFuertes.map((p, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
-                    <span className="text-emerald-500 font-bold flex-shrink-0">✓</span>
+                  <li key={i} className="flex items-start gap-2 text-sm text-palette-text-small">
+                    <span className="text-palette-wt-accent font-bold flex-shrink-0">✓</span>
                     {p}
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="card border-l-4 border-amber-400">
-              <h4 className="font-bold text-slate-800 mb-3 flex items-center gap-2">
-                <AlertCircle size={16} className="text-amber-500" />
+            <div className="card border-l-4 border-palette-button-primary">
+              <h4 className="font-bold text-palette-text-primary mb-3 flex items-center gap-2">
+                <AlertCircle size={16} className="text-palette-button-primary" />
                 Áreas de mejora
               </h4>
               <ul className="space-y-2">
                 {result.areasMejora.map((a, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-slate-600">
-                    <span className="text-amber-500 font-bold flex-shrink-0">→</span>
+                  <li key={i} className="flex items-start gap-2 text-sm text-palette-text-small">
+                    <span className="text-palette-button-primary font-bold flex-shrink-0">→</span>
                     {a}
                   </li>
                 ))}
@@ -327,10 +327,10 @@ export default function ChallengeDetail() {
           </div>
 
           <div className="flex gap-3 flex-wrap">
-            <Link to="/challenges" className="btn-secondary flex-1 text-center">
+            <Link to="/challenges" className="bg-slate-100 hover:bg-slate-200 text-palette-text-primary font-semibold px-6 py-3 rounded-xl flex-1 text-center transition-all">
               Ver más retos
             </Link>
-            <Link to="/dashboard" className="btn-primary flex-1 text-center">
+            <Link to="/dashboard" className="bg-palette-button-primary hover:opacity-90 text-white font-semibold px-6 py-3 rounded-xl flex-1 text-center transition-all shadow-md">
               Ver mi perfil actualizado
             </Link>
           </div>

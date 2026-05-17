@@ -12,8 +12,8 @@ export default function CandidateCard({ candidate }) {
           {initials}
         </div>
         <div className="flex-1 min-w-0">
-          <h3 className="font-bold text-slate-800 truncate">{name}</h3>
-          <p className="text-xs text-slate-500 truncate">{career}</p>
+          <h3 className="font-bold text-palette-text-primary truncate">{name}</h3>
+          <p className="text-xs text-palette-text-small truncate">{career}</p>
         </div>
         <ScoreRing score={score} size="sm" />
       </div>
@@ -23,7 +23,7 @@ export default function CandidateCard({ candidate }) {
           <SkillBadge key={b.id} skill={b.skill} level={b.level} icon={b.icon} size="sm" />
         ))}
         {badges.length > 2 && (
-          <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-500 border border-slate-200">
+          <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-palette-fonto-light text-palette-text-primary border border-palette-button-primary">
             +{badges.length - 2} más
           </span>
         )}
